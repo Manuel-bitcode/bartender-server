@@ -1,6 +1,6 @@
 import swaggerJSDoc from 'swagger-jsdoc';
 
-export const swaggerSpec = (port: number) => swaggerJSDoc({
+export const swaggerSpec = (urlServer: string) => swaggerJSDoc({
   definition: {
     openapi: '3.0.0',
     info: {
@@ -10,7 +10,7 @@ export const swaggerSpec = (port: number) => swaggerJSDoc({
     },
     servers: [
       {
-        url: `http://localhost:${port}`,
+        url: urlServer,
       },
     ],
   },
