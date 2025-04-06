@@ -7,13 +7,15 @@ import { swaggerSpec } from './docs/swagger';
 dotenv.config();
 
 const app = express();
-const urlServer = process.env.URL_SERVER as string;
+const port = process.env.PORT || '3003';
+const isProduction = process.env.NODE_ENV === 'production';
+const urlServer= isProduction ? process.env.URL_SERVER as string : `http://localhost:${port}`;
 //swagger
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec(urlServer)));
 
 app.use('/v1/coctail', coctailRouter);
 
-app.listen(urlServer, () => {
+app.listen(port, () => {
   console.log(`✅ Servidor corriendo en ${urlServer}`);
   console.log(`📘 Swagger en ${urlServer}/docs`);
 });
